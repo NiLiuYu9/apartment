@@ -1,12 +1,11 @@
 package com.n.lease.model.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 支付方式表
@@ -39,16 +38,21 @@ public class PaymentType implements Serializable {
     /**
      * 创建时间
      */
+    @JsonIgnore
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
      * 更新时间
      */
+    @JsonIgnore
+    @TableField(fill = FieldFill.UPDATE)
     private Date updateTime;
 
     /**
      * 是否删除
      */
+    @JsonIgnore
     private Integer isDeleted;
 
     @TableField(exist = false)

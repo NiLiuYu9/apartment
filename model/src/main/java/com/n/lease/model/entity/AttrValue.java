@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 /**
@@ -34,16 +36,19 @@ public class AttrValue implements Serializable {
     /**
      * 创建时间
      */
+    @JsonIgnore
     private Date createTime;
 
     /**
      * 修改时间
      */
+    @JsonIgnore
     private Date updateTime;
 
     /**
      * 是否删除
      */
+    @JsonIgnore
     private Integer isDeleted;
 
     @TableField(exist = false)
