@@ -1,6 +1,7 @@
 package com.n.lease.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -42,7 +43,9 @@ public class ViewAppointment implements Serializable {
 
     /**
      * 预约时间
+     * 设置时间格式
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date appointmentTime;
 
     /**

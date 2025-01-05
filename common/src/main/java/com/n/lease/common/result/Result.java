@@ -5,6 +5,7 @@ import lombok.Data;
 
 /**
  * 全局统一返回结果类
+ * 泛型是返回值的类型
  */
 @Data
 public class Result<T> {
@@ -46,5 +47,11 @@ public class Result<T> {
 
     public static <T> Result<T> fail() {
         return build(null, ResultCodeEnum.FAIL);
+    }
+    public static <T> Result<T> fail(Integer code,String message) {
+        Result<T> result = build(null);
+        result.setCode(code);
+        result.setMessage(message);
+        return result;
     }
 }

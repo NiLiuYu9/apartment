@@ -28,6 +28,7 @@ public class UserInfo implements Serializable {
     /**
      * 密码
      */
+    @TableField(select = false)
     private String password;
 
     /**

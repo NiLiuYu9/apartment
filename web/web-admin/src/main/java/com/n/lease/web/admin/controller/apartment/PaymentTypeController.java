@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+//支付方式管理
 @Tag(name = "支付方式管理")
 @RequestMapping("/admin/payment")
 @RestController
@@ -19,6 +19,7 @@ public class PaymentTypeController {
     @Autowired
     private PaymentTypeService paymentTypeService;
 
+    //查询全部支付方式
     @Operation(summary = "查询全部支付方式列表")
     @GetMapping("list")
     public Result<List<PaymentType>> listPaymentType() {
@@ -26,13 +27,15 @@ public class PaymentTypeController {
         return Result.ok(paymentTypes);
     }
 
+    //保存或更新支付方式
     @Operation(summary = "保存或更新支付方式")
     @PostMapping("saveOrUpdate")
     public Result saveOrUpdatePaymentType(@RequestBody PaymentType paymentType) {
-        paymentTypeService.saveOrUpdate(paymentType);
+        paymentTypeService.saveOrUpdate(paymentType);//id为null时sava，不为null时update
         return Result.ok();
     }
 
+    //根据ID删除支付方式
     @Operation(summary = "根据ID删除支付方式")
     @DeleteMapping("deleteById")
     public Result deletePaymentById(@RequestParam Long id) {

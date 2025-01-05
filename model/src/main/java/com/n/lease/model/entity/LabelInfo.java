@@ -2,6 +2,7 @@ package com.n.lease.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.n.lease.model.enums.ItemType;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -23,7 +24,7 @@ public class LabelInfo implements Serializable {
     /**
      * 类型（1:公寓标签,2:房间标签）
      */
-    private Integer type;
+    private ItemType type;
 
     /**
      * 标签名称

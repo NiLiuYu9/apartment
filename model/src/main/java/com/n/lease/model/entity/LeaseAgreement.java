@@ -2,6 +2,7 @@ package com.n.lease.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.n.lease.model.enums.LeaseStatus;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -80,7 +81,7 @@ public class LeaseAgreement implements Serializable {
     /**
      * 租约状态（1:签约待确认，2:已签约，3:已取消，4:已到期，5:退租待确认，6:已退租，7:续约待确认）
      */
-    private Integer status;
+    private LeaseStatus status;
 
     /**
      * 租约来源（1:新签，2:续约）

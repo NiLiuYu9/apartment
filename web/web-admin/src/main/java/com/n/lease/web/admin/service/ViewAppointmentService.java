@@ -1,7 +1,11 @@
 package com.n.lease.web.admin.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.n.lease.model.entity.ViewAppointment;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.n.lease.web.admin.vo.appointment.AppointmentQueryVo;
+import com.n.lease.web.admin.vo.appointment.AppointmentVo;
 
 /**
 * @author 倪刘宇
@@ -10,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface ViewAppointmentService extends IService<ViewAppointment> {
 
+    IPage<AppointmentVo> pageAppointmentByQuery(Page<AppointmentVo> page, AppointmentQueryVo queryVo);
 }

@@ -11,12 +11,14 @@ import java.util.Date;
  * 公寓信息表
  * @TableName apartment_info
  */
+//声明实体类对应的表名
 @TableName(value ="apartment_info")
 @Data
 public class ApartmentInfo implements Serializable {
     /**
      * 公寓id
      */
+    //声明主键字段
     @TableId(type = IdType.AUTO)
     private Long id;
 

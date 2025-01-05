@@ -2,6 +2,7 @@ package com.n.lease.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.n.lease.model.enums.BaseStatus;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -28,6 +29,7 @@ public class SystemUser implements Serializable {
     /**
      * 密码
      */
+    @JsonIgnore
     private String password;
 
     /**
@@ -63,7 +65,7 @@ public class SystemUser implements Serializable {
     /**
      * 账号状态
      */
-    private Integer status;
+    private BaseStatus status;
 
     /**
      * 创建时间

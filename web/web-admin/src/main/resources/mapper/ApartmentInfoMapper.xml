@@ -32,4 +32,76 @@
         phone,is_release,create_time,
         update_time,is_deleted
     </sql>
+    <select id="pageItem" resultType="com.n.lease.web.admin.vo.apartment.ApartmentItemVo">
+        select ai.id,
+               ai.name,
+               ai.introduction,
+               ai.district_id,
+               ai.district_name,
+               ai.city_id,
+               ai.city_name,
+               ai.province_id,
+               ai.province_name,
+               ai.address_detail,
+               ai.latitude,
+               ai.longitude,
+               ai.phone,
+               ai.is_release,
+               ifnull(tc.cnt,0)          total_room_count,
+#                全部房间数-已租出房间数 = 空闲房间数
+               ifnull(tc.cnt,0) - ifnull(cc.cnt,0) free_room_count
+#         公寓信息和总房间数和已租房间数的多表查询
+        from (select id,
+                     name,
+                     introduction,
+                     district_id,
+                     district_name,
+                     city_id,
+                     city_name,
+                     province_id,
+                     province_name,
+                     address_detail,
+                     latitude,
+                     longitude,
+                     phone,
+                     is_release
+              from apartment_info
+                <where>
+                    is_deleted=0
+                    <if test="queryVo.provinceId!=null">
+                        and province_id=#{queryVo.provinceId}
+                    </if>
+                    <if test="queryVo.cityId!=null">
+                        and city_id=#{queryVo.cityId}
+                    </if>
+                    <if test="queryVo.districtId!=null">
+                        and district_id=#{queryVo.districtId}
+                    </if>
+                </where>
+#             apartment Infomation
+             ) ai
+                 left join
+             #       求总房间数
+                 (select apartment_id, count(*) cnt
+                  from room_info
+                  where is_deleted = 0
+                    and is_release = 1
+                  group by apartment_id
+#             total count
+#                      将公寓中已经发布的房间通过公寓ID左连接，如果公寓没有已发布的房间该公寓也会显示在查询的结果中
+                 ) tc
+             on ai.id = tc.apartment_id
+                 left join
+             #       求已租房间数
+                 (select apartment_id, count(*) cnt
+                  from lease_agreement
+                  where is_deleted = 0
+        #           2,5分别是签约状态和退租待确认状态
+                    and status in (2, 5)
+                  group by apartment_id
+#             check in count
+#                      将公寓信息和公寓的房间总数通过公寓ID与租约表中的已租出状态的房间通过公寓ID左连接，即为多查询一列为该公寓已经租出的房间数
+                 ) cc
+             on ai.id = cc.apartment_id
+    </select>
 </mapper>

@@ -1,7 +1,10 @@
 package com.n.lease.web.admin.mapper;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.n.lease.model.entity.LeaseAgreement;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.n.lease.web.admin.vo.agreement.AgreementQueryVo;
+import com.n.lease.web.admin.vo.agreement.AgreementVo;
 
 /**
 * @author 倪刘宇
@@ -11,6 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface LeaseAgreementMapper extends BaseMapper<LeaseAgreement> {
 
+    IPage<AgreementVo> pageAgreement(IPage<AgreementVo> page, AgreementQueryVo queryVo);
 }
 
 
